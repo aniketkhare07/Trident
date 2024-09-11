@@ -1,0 +1,39 @@
+<div class="backdrop" fxLayoutAlign="center center" fxFlexFill>
+    <mat-card fxflex="25" class="card">
+        <mat-card-header>
+            <mat-card-subtitle class="subtitle">Welcome to</mat-card-subtitle>
+            <mat-card-title class="title">Trident</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content fxLayout="column" fxLayout.xs="column">
+
+          <form [formGroup]="loginForm" (ngSubmit)="login()" fxLayout="column" fxLayout.xs="column">
+            <mat-form-field fxFlexFill >
+              <mat-label>Username</mat-label>
+              <input matInput
+                     formControlName="username"
+                     required>
+              @if (loginForm.get('username')?.hasError('required')) {
+                <mat-error>Username is required</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field fxFlexFill>
+              <mat-label>Password</mat-label>
+              <input matInput 
+                     formControlName="password"
+                     [type]="hide ? 'password' : 'text'"
+                     required>
+              <button type="button" mat-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              @if (loginForm.get('password')?.hasError('required')) {
+                  <mat-error>Password is required</mat-error>
+                }
+            </mat-form-field>
+
+          <button type="submit" mat-raised-button color="primary">Login</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+</div>

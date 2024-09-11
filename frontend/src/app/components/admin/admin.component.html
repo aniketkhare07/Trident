@@ -1,0 +1,19 @@
+<app-navbar></app-navbar>
+<mat-sidenav-container fxFlexFill>
+    <mat-sidenav opened="true" mode="side"> 
+        <mat-nav-list>
+            <a mat-list-item *ngFor="let item of menuItems()" 
+            [routerLink]="item.route"
+            routerLinkActive="selected-menu-item"
+            #rla="routerLinkActive"
+            [activated]="rla.isActive"
+            class="links"> 
+                <mat-icon matListItemIcon>{{item.icon}}</mat-icon>
+                <span class="hidden" matListItemTitle>{{item.label}}</span>
+            </a>
+        </mat-nav-list>
+     </mat-sidenav>
+    <mat-sidenav-container class="content">
+        <router-outlet></router-outlet>
+    </mat-sidenav-container>
+</mat-sidenav-container>

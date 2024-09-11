@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+
+<div fxLayoutAlign="center center" fxFlexFill>
+    <mat-card class="tab-container">
+        <mat-card-content>
+            <mat-tab-group>
+                <mat-tab label="Center" fxLayoutAlign="space-around center"> 
+                    <div class="center" fxLayout="column">
+                        <h3>Request new Center</h3>
+                        <form [formGroup]="centerForm" (ngSubmit)="requestCenter()" *ngIf="!centerSubmitted" fxLayout="column" fxLayout.xs="column" fxLayoutGap="10px">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Username</mat-label>
+                                <input matInput formControlName="username">
+                              </mat-form-field>
+                              <mat-form-field appearance="outline">
+                                <mat-label>Center Code</mat-label>
+                                <input matInput formControlName="centerCode">
+                              </mat-form-field>
+                              <button mat-raised-button color="primary">Request center</button>
+                        </form>
+                     </div>
+                </mat-tab>
+            
+                <mat-tab label="Batch"> 
+                    <div class="center" fxLayout="column">
+                        <h3>Request new batch</h3>
+                        <form [formGroup]="batchForm" (ngSubmit)="requestBatch()" *ngIf="!batchSubmitted" fxLayout="column" fxLayout.xs="column" fxLayoutGap="10px">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Username</mat-label>
+                                <input matInput formControlName="username">
+                              </mat-form-field>
+                              <mat-form-field class="data-options" appearance="outline">
+                                <mat-label>Select Center</mat-label>
+                                <mat-select formControlName="centerCode">
+                                    <mat-option *ngFor="let center of centerList" [value]="center.centerCode">{{ center.centerCode }}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Batch</mat-label>
+                                <input matInput formControlName="batchCode">
+                              </mat-form-field>
+                              <button mat-raised-button color="primary">Request batch</button>
+                        </form>
+                    </div>
+                </mat-tab>
+              </mat-tab-group>
+        </mat-card-content>
+    </mat-card>
+</div>
+  

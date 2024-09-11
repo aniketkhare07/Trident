@@ -1,0 +1,33 @@
+<div fxFlexFill fxLayoutAlign="center center" fxLayout="column" fxLayoutGap="10px">
+    <!-- Request new batch/ center area -->
+    <!-- Data display section  -->
+    <div fxLayoutAlign="center center" fxFlexFill>
+        <mat-card class="tab-container">
+            <mat-card class="request-box">
+                <mat-card-content>
+                    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+                        <!-- Request text  -->
+                        <div class="req-text">
+                            <h3><span>Request</span></h3>
+                        </div>
+                        <!-- Request Button  -->
+
+                    </div>
+                </mat-card-content>
+            </mat-card>
+            <mat-card-content>
+                <mat-tab-group>
+                    <mat-tab label="Center" fxLayoutAlign="space-around center">
+                        <app-center-tab></app-center-tab>
+                    </mat-tab>
+
+                    <mat-tab label="Batch">
+                        <app-batch-tab></app-batch-tab>
+                    </mat-tab>
+                </mat-tab-group>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+
+</div>

@@ -1,0 +1,41 @@
+<div class="container" fxFlexFill fxLayout="column">
+    <h2>Dashboard</h2>
+    <div class="box-content" fxLayout="row" fxLayout.xs="column" fxLayoutGap="5%" fxLayoutAlign="center center">
+      <div class="user">
+            <mat-card>
+                <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+                    <div class="text" fxLayout="column" fxLayoutAlign="center center">
+                        Total <br><span>{{ totalUsers }}</span>Users.
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="user">
+            <mat-card>
+                <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+                    <div class="text" fxLayout="column" fxLayoutAlign="center center">
+                        Centers <br><span>{{ totalCenters }}</span>registered
+                    </div> 
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="user">
+            <mat-card>
+                <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+                    <div class="text" fxLayout="column" fxLayoutAlign="center center">
+                        Batches <br><span>{{ totalBatches }}</span>registered
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="user">
+            <mat-card>
+                <mat-card-content fxLayout="column" fxLayoutAlign="center center">
+                    <div class="text" fxLayout="column" fxLayoutAlign="center center">
+                        Total <br><span>{{ totalStudents }}</span>students.
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

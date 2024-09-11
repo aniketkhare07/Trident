@@ -1,0 +1,133 @@
+We are using PostgreSQL.
+
+Write a sql script to create a database 'trident'.
+
+which have following tables:
+
+1. user: user_id(varchar), user_name, user_pass, user_contact, is_active.
+
+2. center: center_id, center_code, user_id(to map which user created this center).
+
+3. batch: batch_id, batch_code, center_code(to map in which center this batch is registered).
+
+4. student: serial_no, student_name, student_id, fin_print1, fin_print2, fin_print3, fin_print4, fin_print5, iris, batch_code(to map in t=which batch this student is enrolled).
+
+5. role: role_name(primary key), description.
+
+6. user_role: user_id, role_name.
+
+Also insert 5 sample data in each table.
+
+
+
+Here is the  SQl Script:
+
+-- Create Database
+CREATE DATABASE trident;
+
+-- Connect to trident database
+\c trident
+
+-- Create user table
+CREATE TABLE "user" (
+    user_id VARCHAR PRIMARY KEY,
+    user_name VARCHAR,
+    user_pass VARCHAR,
+    user_contact VARCHAR,
+    is_active BOOLEAN
+);
+
+-- Insert sample data into user table
+INSERT INTO "user" (user_id, user_name, user_pass, user_contact, is_active)
+VALUES
+    ('1', 'John Doe', 'password1', '123-456-7890', true),
+    ('2', 'Jane Smith', 'password2', '987-654-3210', true),
+    ('3', 'Alice Johnson', 'password3', '555-555-5555', false),
+    ('4', 'Bob Brown', 'password4', '777-777-7777', true),
+    ('5', 'Emily Davis', 'password5', '888-888-8888', true);
+
+-- Create center table
+CREATE TABLE center (
+    center_id SERIAL PRIMARY KEY,
+    center_code VARCHAR,
+    user_id VARCHAR REFERENCES "user" (user_id)
+);
+
+-- Insert sample data into center table
+INSERT INTO center (center_code, user_id)
+VALUES
+    ('C001', '1'),
+    ('C002', '2'),
+    ('C003', '3'),
+    ('C004', '4'),
+    ('C005', '5');
+
+-- Create batch table
+CREATE TABLE batch (
+    batch_id SERIAL PRIMARY KEY,
+    batch_code VARCHAR,
+    center_code VARCHAR REFERENCES center (center_code)
+);
+
+-- Insert sample data into batch table
+INSERT INTO batch (batch_code, center_code)
+VALUES
+    ('B001', 'C001'),
+    ('B002', 'C002'),
+    ('B003', 'C003'),
+    ('B004', 'C004'),
+    ('B005', 'C005');
+
+-- Create student table
+CREATE TABLE student (
+    serial_no SERIAL PRIMARY KEY,
+    student_name VARCHAR,
+    student_id VARCHAR,
+    fin_print1 TEXT,
+    fin_print2 TEXT,
+    fin_print3 TEXT,
+    fin_print4 TEXT,
+    fin_print5 TEXT,
+    iris TEXT,
+    batch_code VARCHAR REFERENCES batch (batch_code)
+);
+
+-- Insert sample data into student table
+INSERT INTO student (student_name, student_id, fin_print1, fin_print2, fin_print3, fin_print4, fin_print5, iris, batch_code)
+VALUES
+    ('Student 1', 'S001', 'fingerprint1', 'fingerprint2', 'fingerprint3', 'fingerprint4', 'fingerprint5', 'iris_scan1', 'B001'),
+    ('Student 2', 'S002', 'fingerprint1', 'fingerprint2', 'fingerprint3', 'fingerprint4', 'fingerprint5', 'iris_scan2', 'B002'),
+    ('Student 3', 'S003', 'fingerprint1', 'fingerprint2', 'fingerprint3', 'fingerprint4', 'fingerprint5', 'iris_scan3', 'B003'),
+    ('Student 4', 'S004', 'fingerprint1', 'fingerprint2', 'fingerprint3', 'fingerprint4', 'fingerprint5', 'iris_scan4', 'B004'),
+    ('Student 5', 'S005', 'fingerprint1', 'fingerprint2', 'fingerprint3', 'fingerprint4', 'fingerprint5', 'iris_scan5', 'B005');
+
+-- Create role table
+CREATE TABLE role (
+    role_name VARCHAR PRIMARY KEY,
+    description VARCHAR
+);
+
+-- Insert sample data into role table
+INSERT INTO role (role_name, description)
+VALUES
+    ('Admin', 'Has all privileges'),
+    ('Teacher', 'Can manage students and batches'),
+    ('Staff', 'Limited privileges'),
+    ('Student', 'Limited privileges'),
+    ('Guest', 'No privileges');
+
+-- Create user_role table
+CREATE TABLE user_role (
+    user_id VARCHAR REFERENCES "user" (user_id),
+    role_name VARCHAR REFERENCES role (role_name),
+    PRIMARY KEY (user_id, role_name)
+);
+
+-- Insert sample data into user_role table
+INSERT INTO user_role (user_id, role_name)
+VALUES
+    ('1', 'Admin'),
+    ('2', 'Teacher'),
+    ('3', 'Staff'),
+    ('4', 'Student'),
+    ('5', 'Guest');

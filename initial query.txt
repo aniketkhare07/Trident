@@ -1,0 +1,3 @@
+INSERT INTO public.users  (
+	userid, contact, is_active, name, password, role, username)
+	VALUES(1, '6547891230', true, 'Admin', '$2a$10$9HsZFQkWduzS9swwv9qyVOKnbP1l0GliI2CH72kaXyqSp4jqyydFO', 1, 'admin);

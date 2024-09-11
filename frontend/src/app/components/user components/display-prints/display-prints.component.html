@@ -1,0 +1,18 @@
+<!-- <div class="container" fxFlexFill>
+    <carousel>
+        <slide *ngFor="let slide of slides" class="slider">
+            <div class="slide-container">
+                <img [src]="slide.image" alt="Slide {{slide.id}}" class="centered-image">
+            </div>
+        </slide>
+      </carousel>
+</div> -->
+<div class="container" fxFlexFill>
+    <div class="carousel-container" *ngIf="slides.length > 0">
+        <button class="carousel-button" (click)="prevSlide()">&lt;</button>
+        <div class="carousel-slide">
+          <img [src]="slides[currentSlide].image" alt="Slide Image" class="carousel-image">
+        </div>
+        <button class="carousel-button" (click)="nextSlide()">&gt;</button>
+    </div>    
+</div>
